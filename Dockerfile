@@ -34,8 +34,8 @@ RUN \
   npm install node-gyp@3.6.2
 RUN \
   npm install typescript@^2.0.2
-RUN \
-  npm install closure-util
+#RUN \
+#  npm install closure-util
 RUN \
   npm install openlayers@4.6.5
 RUN \
