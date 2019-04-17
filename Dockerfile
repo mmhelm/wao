@@ -25,15 +25,18 @@ MAINTAINER Markus Helm <markus.m.helm@live.de>
 
 USER root
 
+RUN mkdir ~/.npm-global
+ENV NPM_CONFIG_PREFIX ~/.npm-global
+
 RUN \
-  sudo npm install -g @angular/cli@latest
+  npm install -g @angular/cli@latest
 RUN \
-  sudo npm install -g node-gyp@3.6.2
+  npm install -g node-gyp@3.6.2
 RUN \
-  sudo npm install -g typescript@^2.0.2
+  npm install -g typescript@^2.0.2
 RUN \
-  sudo npm install -g closure-util --unsafe-perm=true
+  npm install -g closure-util
 RUN \
-  sudo npm install openlayers@4.6.5
+  npm install openlayers@4.6.5
 RUN \
-  sudo npm install -g node-sass
+  npm install -g node-sass
