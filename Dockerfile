@@ -29,14 +29,14 @@ RUN mkdir ~/.npm-global
 ENV NPM_CONFIG_PREFIX ~/.npm-global
 
 RUN \
-  npm install @angular/cli@latest
+  npm install -g @angular/cli@latest
 RUN \
-  npm install node-gyp@3.6.2
+  npm install -g node-gyp@3.6.2
 RUN \
-  npm install typescript@^2.0.2
+  npm install -g typescript@^2.0.2
 #RUN \
 #  npm install closure-util
 RUN \
   npm install openlayers@4.6.5
 RUN \
-  npm install node-sass
+  npm install -g node-sass
