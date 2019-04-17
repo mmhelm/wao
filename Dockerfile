@@ -23,6 +23,8 @@
 FROM node:10.15.3-alpine
 MAINTAINER Markus Helm <markus.m.helm@live.de>
 
+USER root
+
 RUN \
   npm install -g @angular/cli@latest \
   && \
