@@ -26,14 +26,21 @@ MAINTAINER Markus Helm <markus.m.helm@live.de>
 USER root
 
 RUN \
-  npm install -g @angular/cli@latest \
+  npm config set proxy http://10.66.84.153:3128 \
   && \
-  npm install -g node-gyp@3.6.2 \
+  npm config set https-proxy http://10.66.84.153:3128 \
   && \
-  npm install -g typescript@^2.0.2 \
-  && \
-  npm install -g closure-util \
-  && \
-  npm install openlayers@4.6.5 \
-  && \
+  npm config set strict-ssl "false"
+
+RUN \
+  npm install -g @angular/cli@latest
+RUN \
+  npm install -g node-gyp@3.6.2
+RUN \
+  npm install -g typescript@^2.0.2
+RUN \
+  npm install -g closure-util
+RUN \
+  npm install openlayers@4.6.5
+RUN \
   npm install -g node-sass
