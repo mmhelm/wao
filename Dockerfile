@@ -26,13 +26,6 @@ MAINTAINER Markus Helm <markus.m.helm@live.de>
 USER root
 
 RUN \
-  npm config set proxy http://10.66.84.153:3128 \
-  && \
-  npm config set https-proxy http://10.66.84.153:3128 \
-  && \
-  npm config set strict-ssl "false"
-
-RUN \
   npm install -g @angular/cli@latest
 RUN \
   npm install -g node-gyp@3.6.2
