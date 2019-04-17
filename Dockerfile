@@ -26,14 +26,14 @@ MAINTAINER Markus Helm <markus.m.helm@live.de>
 USER root
 
 RUN \
-  npm install -g @angular/cli@latest
+  sudo npm install -g @angular/cli@latest
 RUN \
-  npm install -g node-gyp@3.6.2
+  sudo npm install -g node-gyp@3.6.2
 RUN \
-  npm install -g typescript@^2.0.2
+  sudo npm install -g typescript@^2.0.2
 RUN \
-  npm install -g closure-util
+  sudo npm install -g closure-util --unsafe-perm=true
 RUN \
-  npm install openlayers@4.6.5
+  sudo npm install openlayers@4.6.5
 RUN \
-  npm install -g node-sass
+  sudo npm install -g node-sass
