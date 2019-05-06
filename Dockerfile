@@ -28,15 +28,39 @@ USER root
 RUN mkdir ~/.npm-global
 ENV NPM_CONFIG_PREFIX ~/.npm-global
 
-RUN \
-  npm install -g @angular/cli@latest
-RUN \
-  npm install -g node-gyp@3.6.2
-RUN \
-  npm install -g typescript@^2.0.2
-#RUN \
-#  npm install closure-util
-RUN \
-  npm install openlayers@4.6.5
-RUN \
+RUN  npm install -g @angular/cli@latest  \
+  npm install -g node-gyp@3.6.2 \
+  npm install -g typescript@^2.0.2 \
+  npm install openlayers@4.6.5 \
   npm install -g node-sass
+
+RUN apk add "openjdk8-jre=8.212.04-r0"
+
+ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk/jre
+ENV PATH $PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin
+
+ENV JAVA_VERSION 8u212
+ENV JAVA_ALPINE_VERSION 8.212.04-r0
+
+# Download the Jenkins Slave JAR
+RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/3.9/remoting-3.9.jar \
+	&& chmod 755 /usr/share/jenkins \
+	&& chmod 644 /usr/share/jenkins/slave.jar
+
+# Download the Jenkins Slave StartUp Script
+RUN curl --create-dirs -sSLo /usr/local/bin/jenkins-slave https://raw.githubusercontent.com/jenkinsci/docker-jnlp-slave/3.27-1/jenkins-slave \
+	&& chmod a+x /usr/local/bin/jenkins-slave
+
+# Add a dedicated jenkins system user
+RUN useradd --system --shell /bin/bash --create-home --home /home/jenkins jenkins
+
+# Switch to user `jenkins`
+USER jenkins
+
+# Prepare the workspace for user `jenkins`
+RUN mkdir -p /home/jenkins/.jenkins
+VOLUME /home/jenkins/.jenkins
+WORKDIR /home/jenkins
+
+ENTRYPOINT ["jenkins-slave"]
+
