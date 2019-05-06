@@ -28,13 +28,13 @@ USER root
 RUN mkdir ~/.npm-global
 ENV NPM_CONFIG_PREFIX ~/.npm-global
 
-#RUN  npm install -g @angular/cli@latest  \
-#  npm install -g node-gyp@3.6.2 \
-#  npm install -g typescript@^2.0.2 \
-#  npm install openlayers@4.6.5 \
-#  npm install -g node-sass
+RUN npm install -g @angular/cli@latest
+RUN npm install -g node-gyp@3.6.2
+RUN npm install -g typescript@^2.0.2
+RUN npm install openlayers@4.6.5
+RUN npm install -g node-sass
 
-RUN sh -c "apk add openjdk8-jre"
+RUN sh -c "apk add openjdk8-jre==8.212.04-r0"
 RUN sh -c "apk add curl"
 
 ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk/jre
