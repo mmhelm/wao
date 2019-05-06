@@ -20,7 +20,7 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
 
-FROM mhelm/wao
+FROM node:10.15.3-alpine
 MAINTAINER Markus Helm <markus.m.helm@live.de>
 
 USER root
