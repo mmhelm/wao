@@ -20,7 +20,7 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
 
-FROM node:10.15.3-alpine
+FROM mhelm/wao
 MAINTAINER Markus Helm <markus.m.helm@live.de>
 
 USER root
@@ -34,8 +34,8 @@ RUN  npm install -g @angular/cli@latest  \
   npm install openlayers@4.6.5 \
   npm install -g node-sass
 
-RUN apk add "openjdk8-jre=8.212.04-r0" \
-    apk add curl
+RUN sh -c "apk add openjdk8-jre"
+RUN sh -c "apk add curl"
 
 ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk/jre
 ENV PATH $PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin
