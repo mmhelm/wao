@@ -34,7 +34,8 @@ RUN  npm install -g @angular/cli@latest  \
   npm install openlayers@4.6.5 \
   npm install -g node-sass
 
-RUN apk add "openjdk8-jre=8.212.04-r0"
+RUN apk add "openjdk8-jre=8.212.04-r0" \
+    apk add curl
 
 ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk/jre
 ENV PATH $PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin
