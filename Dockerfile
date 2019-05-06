@@ -53,7 +53,7 @@ RUN curl --create-dirs -sSLo /usr/local/bin/jenkins-slave https://raw.githubuser
 	&& chmod a+x /usr/local/bin/jenkins-slave
 
 # Add a dedicated jenkins system user
-RUN useradd --system --shell /bin/bash --create-home --home /home/jenkins jenkins
+RUN addgroup -S jenkins && adduser -S jenkins -G jenkins
 
 # Switch to user `jenkins`
 USER jenkins
