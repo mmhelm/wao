@@ -20,7 +20,7 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
 
-FROM node:10.15.3-alpine
+FROM mhelm
 MAINTAINER Markus Helm <markus.m.helm@live.de>
 
 USER root
@@ -28,20 +28,23 @@ USER root
 RUN mkdir ~/.npm-global
 ENV NPM_CONFIG_PREFIX ~/.npm-global
 
+RUN npm install -g is-extendable@^0.1.0
 RUN npm install -g @angular/cli@latest
 RUN npm install -g node-gyp@3.6.2
 RUN npm install -g typescript@^2.0.2
 RUN npm install openlayers@4.6.5
 RUN npm install -g node-sass
 
+ENV JAVA_VERSION 8u212
+ENV JAVA_ALPINE_VERSION 8.212.04-r0
+
 RUN sh -c "apk add openjdk8-jre==8.212.04-r0"
 RUN sh -c "apk add curl"
+RUN sh -c "apk add git"
+RUN sh -c "apk add sudo"
 
 ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk/jre
 ENV PATH $PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin
-
-ENV JAVA_VERSION 8u212
-ENV JAVA_ALPINE_VERSION 8.212.04-r0
 
 # Download the Jenkins Slave JAR
 RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/3.9/remoting-3.9.jar \
@@ -53,7 +56,8 @@ RUN curl --create-dirs -sSLo /usr/local/bin/jenkins-slave https://raw.githubuser
 	&& chmod a+x /usr/local/bin/jenkins-slave
 
 # Add a dedicated jenkins system user
-RUN addgroup -S jenkins && adduser -S jenkins -G jenkins
+RUN addgroup -S jenkins && adduser -S jenkins -G wheel
+RUN sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers
 
 # Switch to user `jenkins`
 USER jenkins
